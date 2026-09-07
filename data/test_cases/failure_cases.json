@@ -1,0 +1,43 @@
+[
+    {
+        "case_id": "F001",
+        "description": "LLM service unavailable",
+        "failure_type": "llm_unavailable",
+        "session_summary": "Student reports examination stress and difficulty sleeping.",
+        "expected_behavior": [
+            "fallback_used",
+            "human_review_required",
+            "consent_filter_applied"
+        ]
+    },
+    {
+        "case_id": "F002",
+        "description": "LLM returns empty extraction",
+        "failure_type": "empty_extraction",
+        "session_summary": "Student reports examination stress before upcoming exams.",
+        "expected_behavior": [
+            "fallback_used",
+            "human_review_required"
+        ]
+    },
+    {
+        "case_id": "F003",
+        "description": "Consent information missing",
+        "failure_type": "missing_consent",
+        "session_summary": "Student reports family conflict and examination stress.",
+        "expected_behavior": [
+            "information_without_consent_excluded",
+            "human_review_required"
+        ]
+    },
+    {
+        "case_id": "F004",
+        "description": "Ambiguous statement requiring professional clarification",
+        "failure_type": "ambiguous_statement",
+        "session_summary": "Student says that sometimes everything feels difficult and unclear.",
+        "expected_behavior": [
+            "ambiguous_risk",
+            "human_review_required"
+        ]
+    }
+]

@@ -1,0 +1,82 @@
+[
+    {
+        "case_id": "E001",
+        "description": "Normal exam stress with restricted family information",
+        "session_summary": "Student reports examination stress and difficulty sleeping. Student also mentions conflict with family regarding grades.",
+        "consent": {
+            "exam_stress": "allowed",
+            "sleep_difficulty": "allowed",
+            "family_information": "restricted"
+        },
+        "expected_allowed": [
+            "exam_stress",
+            "sleep_difficulty"
+        ],
+        "expected_restricted": [
+            "family_information"
+        ],
+        "expected_risk": "low",
+        "expected_human_review": false
+    },
+    {
+        "case_id": "E002",
+        "description": "Urgent safety concern",
+        "session_summary": "Student reports feeling unsafe and describes a possible immediate safety concern.",
+        "consent": {
+            "safety_concern": "allowed"
+        },
+        "expected_allowed": [
+            "safety_concern"
+        ],
+        "expected_restricted": [],
+        "expected_risk": "urgent",
+        "expected_human_review": true
+    },
+    {
+        "case_id": "E003",
+        "description": "Ambiguous statement requiring clarification",
+        "session_summary": "Student makes an unclear statement suggesting that something may be seriously wrong but provides no clear explanation.",
+        "consent": {
+            "ambiguous_statement": "restricted"
+        },
+        "expected_allowed": [],
+        "expected_restricted": [
+            "ambiguous_statement"
+        ],
+        "expected_risk": "ambiguous",
+        "expected_human_review": true
+    },
+    {
+        "case_id": "E004",
+        "description": "Exam stress and sleep difficulty",
+        "session_summary": "Student reports significant stress because of examinations and difficulty sleeping during the week.",
+        "consent": {
+            "exam_stress": "allowed",
+            "sleep_difficulty": "allowed"
+        },
+        "expected_allowed": [
+            "exam_stress",
+            "sleep_difficulty"
+        ],
+        "expected_restricted": [],
+        "expected_risk": "low",
+        "expected_human_review": false
+    },
+    {
+        "case_id": "E005",
+        "description": "Restricted family information",
+        "session_summary": "Student discusses examination stress and private family problems that the student does not want included in the handover.",
+        "consent": {
+            "exam_stress": "allowed",
+            "family_information": "restricted"
+        },
+        "expected_allowed": [
+            "exam_stress"
+        ],
+        "expected_restricted": [
+            "family_information"
+        ],
+        "expected_risk": "low",
+        "expected_human_review": false
+    }
+]

@@ -1,0 +1,18 @@
+{
+    "baseline": {
+        "total_cases": 5,
+        "consent_violations": 3,
+        "consent_violation_rate": 60.0,
+        "risk_accuracy": 60.0,
+        "human_review_accuracy": 60.0,
+        "allowed_information_retention": 100.0
+    },
+    "prototype": {
+        "total_cases": 5,
+        "consent_violations": 0,
+        "consent_violation_rate": 0.0,
+        "risk_accuracy": 100.0,
+        "human_review_accuracy": 100.0,
+        "allowed_information_retention": 100.0
+    }
+}

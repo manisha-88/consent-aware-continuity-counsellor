@@ -1,0 +1,11 @@
+case_id,system,predicted_categories,restricted_categories,predicted_risk,expected_risk,predicted_human_review,expected_human_review,consent_violation
+E001,baseline,"exam_stress, sleep_difficulty, family_information",,low,low,False,False,True
+E002,baseline,safety_concern,,low,urgent,False,True,False
+E003,baseline,ambiguous_statement,,low,ambiguous,False,True,True
+E004,baseline,"exam_stress, sleep_difficulty",,low,low,False,False,False
+E005,baseline,"exam_stress, family_information",,low,low,False,False,True
+E001,prototype,"exam_stress, sleep_difficulty",family_information,low,low,False,False,False
+E002,prototype,safety_concern,,urgent,urgent,True,True,False
+E003,prototype,,ambiguous_statement,ambiguous,ambiguous,True,True,False
+E004,prototype,"exam_stress, sleep_difficulty",,low,low,False,False,False
+E005,prototype,exam_stress,family_information,low,low,False,False,False

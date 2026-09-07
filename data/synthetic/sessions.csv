@@ -1,0 +1,13 @@
+session_id,client_id,session_date,session_summary
+SS001,C001,2026-08-10,"Student reports exam-related stress, difficulty sleeping and difficulty concentrating. Student wants support with managing study stress."
+SS002,C002,2026-08-11,"Student reports anxiety about academic performance and feels overwhelmed by multiple assignments. Student wants help organizing academic responsibilities."
+SS003,C003,2026-08-12,"Student reports exam stress and mentions conflict with family regarding grades. Student wants help managing stress and specifically requests that family-related information not be shared."
+SS004,C004,2026-08-13,"Student reports difficulty adjusting to university workload and wants strategies for managing time and maintaining regular sleep."
+SS005,C005,2026-08-14,"Student reports feeling isolated during examinations and wants to improve social support and maintain academic routine."
+SS006,C006,2026-08-15,"Student reports feeling overwhelmed and says they do not know how much longer they can continue. The meaning of the statement is unclear from the session summary."
+SS007,C007,2026-08-16,"Student reports feeling unsafe and describes a possible immediate safety concern. Further professional assessment is required."
+SS008,C008,2026-08-17,"Student reports exam stress and poor sleep. Student has been using relaxation techniques and wants to continue improving sleep."
+SS009,C009,2026-08-18,"Student reports concern about academic performance and requests help preparing for examinations. No urgent concern reported."
+SS010,C010,2026-08-19,"Student reports difficulty concentrating during exam preparation and wants help developing a manageable study routine."
+SS011,C011,2026-08-20,"Student reports stress related to examinations and mentions personal information that should not be included in a general handover. Consent preferences need to be checked."
+SS012,C012,2026-08-21,"Student reports academic stress and poor sleep but the session does not clearly specify the student's current goal."
