@@ -20,6 +20,7 @@ def extract_with_llm(
         data = json.loads(response)
 
     except json.JSONDecodeError as exc:
+        print(f"\n[LLM PARSE ERROR] Raw response from Ollama:\n{response}\n")
         raise ValueError(
             "LLM returned invalid JSON."
         ) from exc

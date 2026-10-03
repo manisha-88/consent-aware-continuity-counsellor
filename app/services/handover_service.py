@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 from app.models import (
     CaseContext,
     HandoverSummary,
@@ -34,245 +35,103 @@ def generate_safe_handover(
     case: CaseContext,
 ) -> HandoverSummary:
 
-    # =====================================================
-    # 1. SAFE EXTRACTION
-    # =====================================================
-
-    extraction, extraction_failure = (
-        safe_extract_information(
-            case.session.session_summary
+    # Execute independent LLM calls concurrently
+    with ThreadPoolExecutor() as executor:
+        # Step 1 & 5 in parallel
+        future_extraction = executor.submit(
+            safe_extract_information, case.session.session_summary
         )
-    )
+        future_risk = executor.submit(
+            assess_risk, case
+        )
 
+        extraction, extraction_failure = future_extraction.result()
+        risk_assessment = future_risk.result()
 
-    # =====================================================
-    # 2. VALIDATE EXTRACTION
-    # =====================================================
-
-    possible_omissions = (
-        find_possible_omissions(
+        # Step 2 validation in parallel after extraction completes
+        future_omissions = executor.submit(
+            find_possible_omissions,
             case.session.session_summary,
             extraction.information,
         )
-    )
-
-
-    possible_hallucinations = (
-        find_possible_hallucinations(
+        future_hallucinations = executor.submit(
+            find_possible_hallucinations,
             case.session.session_summary,
             extraction.information,
         )
+
+        possible_omissions = future_omissions.result()
+        possible_hallucinations = future_hallucinations.result()
+
+    # Step 3: Check missing consent
+    missing_consent_categories = find_missing_consent_categories(
+        case,
+        extraction.information,
     )
 
-
-    # =====================================================
-    # 3. CHECK FOR MISSING CONSENT
-    # =====================================================
-
-    missing_consent_categories = (
-        find_missing_consent_categories(
-            case,
-            extraction.information,
-        )
+    # Step 4: Apply consent filter
+    allowed, restricted = filter_information(
+        case,
+        extraction.information,
     )
 
+    # Step 6: Build relevant information
+    relevant_information = [item.content for item in allowed]
+    restricted_information = [item.category.value for item in restricted]
 
-    # =====================================================
-    # 4. APPLY CONSENT FILTER
-    # =====================================================
-
-    allowed, restricted = (
-        filter_information(
-            case,
-            extraction.information,
-        )
-    )
-
-
-    # =====================================================
-    # 5. INDEPENDENT RISK ASSESSMENT
-    # =====================================================
-
-    risk_assessment = assess_risk(
-        case
-    )
-
-
-    # =====================================================
-    # 6. BUILD RELEVANT INFORMATION
-    # =====================================================
-
-    relevant_information = [
-        item.content
-        for item in allowed
-    ]
-
-
-    restricted_information = [
-        item.category.value
-        for item in restricted
-    ]
-
-
-    # =====================================================
-    # 7. CURRENT CONCERN
-    # =====================================================
-
+    # Step 7: Current concern
     if relevant_information:
-
-        current_concern = " ".join(
-            relevant_information
-        )
-
+        current_concern = " ".join(relevant_information)
     else:
-
         current_concern = (
-            "No information is available "
-            "for handover under the current "
-            "consent settings."
+            "No information is available for handover under the current consent settings."
         )
 
+    # Step 8: Escalation guidance
+    escalation_message = get_escalation_message(risk_assessment.level)
 
-    # =====================================================
-    # 8. ESCALATION GUIDANCE
-    # =====================================================
-
-    escalation_message = (
-        get_escalation_message(
-            risk_assessment.level
-        )
-    )
-
-
-    # =====================================================
-    # 9. OPERATIONAL FAILURE HANDLING
-    # =====================================================
-
+    # Step 9: Operational warnings
     operational_warnings = []
-
-
-    # LLM FAILURE
-
     if extraction_failure:
-
-        operational_warnings.append(
-            extraction_failure
-        )
-
-
-    # MISSING CONSENT
-
+        operational_warnings.append(extraction_failure)
     if missing_consent_categories:
-
         operational_warnings.append(
-            "Consent information is missing "
-            "for one or more extracted "
-            "categories. Information without "
-            "explicit permission was excluded."
+            "Consent information is missing for one or more extracted categories. Information without explicit permission was excluded."
         )
-
-
-    # POSSIBLE OMISSIONS
-
     if possible_omissions:
-
         operational_warnings.append(
-            "Possible information omission "
-            "detected during automated "
-            "extraction."
+            "Possible information omission detected during automated extraction."
         )
-
-
-    # POSSIBLE HALLUCINATIONS
-
     if possible_hallucinations:
-
         operational_warnings.append(
-            "Possible unsupported information "
-            "detected during automated "
-            "extraction."
+            "Possible unsupported information detected during automated extraction."
         )
 
-
-    # =====================================================
-    # 10. HUMAN REVIEW DECISION
-    # =====================================================
-
+    # Step 10: Human review decision
     human_review_required = (
-
         risk_assessment.human_review_required
-
         or extraction_failure is not None
-
-        or len(
-            missing_consent_categories
-        ) > 0
-
-        or len(
-            possible_omissions
-        ) > 0
-
-        or len(
-            possible_hallucinations
-        ) > 0
+        or len(missing_consent_categories) > 0
+        or len(possible_omissions) > 0
+        or len(possible_hallucinations) > 0
     )
 
-
-    # =====================================================
-    # 11. ADD FAILURE GUIDANCE
-    # =====================================================
-
+    # Step 11: Add warning messages
     if operational_warnings:
-
-        warning_text = " ".join(
-            operational_warnings
-        )
-
-
+        warning_text = " ".join(operational_warnings)
         escalation_message = (
-            f"{escalation_message} "
-            f"Operational safeguard: "
-            f"{warning_text} "
-            f"Human review is required "
-            f"before using this handover."
+            f"{escalation_message} Operational safeguard: {warning_text} "
+            f"Human review is required before using this handover."
         )
 
-
-    # =====================================================
-    # 12. RETURN HANDOVER
-    # =====================================================
-
+    # Step 12: Return summary
     return HandoverSummary(
-
-        current_concern=(
-            current_concern
-        ),
-
-        client_goals=(
-            case.goals
-        ),
-
-        relevant_information=(
-            relevant_information
-        ),
-
-        pending_actions=(
-            case.pending_actions
-        ),
-
-        restricted_information=(
-            restricted_information
-        ),
-
-        risk_assessment=(
-            risk_assessment
-        ),
-
-        escalation_message=(
-            escalation_message
-        ),
-
-        human_review_required=(
-            human_review_required
-        ),
+        current_concern=current_concern,
+        client_goals=case.goals,
+        relevant_information=relevant_information,
+        pending_actions=case.pending_actions,
+        restricted_information=restricted_information,
+        risk_assessment=risk_assessment,
+        escalation_message=escalation_message,
+        human_review_required=human_review_required,
     )

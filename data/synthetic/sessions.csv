@@ -1,13 +1,31 @@
 session_id,client_id,session_date,session_summary
-SS001,C001,2026-08-10,"Student reports exam-related stress, difficulty sleeping and difficulty concentrating. Student wants support with managing study stress."
-SS002,C002,2026-08-11,"Student reports anxiety about academic performance and feels overwhelmed by multiple assignments. Student wants help organizing academic responsibilities."
-SS003,C003,2026-08-12,"Student reports exam stress and mentions conflict with family regarding grades. Student wants help managing stress and specifically requests that family-related information not be shared."
-SS004,C004,2026-08-13,"Student reports difficulty adjusting to university workload and wants strategies for managing time and maintaining regular sleep."
-SS005,C005,2026-08-14,"Student reports feeling isolated during examinations and wants to improve social support and maintain academic routine."
-SS006,C006,2026-08-15,"Student reports feeling overwhelmed and says they do not know how much longer they can continue. The meaning of the statement is unclear from the session summary."
-SS007,C007,2026-08-16,"Student reports feeling unsafe and describes a possible immediate safety concern. Further professional assessment is required."
-SS008,C008,2026-08-17,"Student reports exam stress and poor sleep. Student has been using relaxation techniques and wants to continue improving sleep."
-SS009,C009,2026-08-18,"Student reports concern about academic performance and requests help preparing for examinations. No urgent concern reported."
-SS010,C010,2026-08-19,"Student reports difficulty concentrating during exam preparation and wants help developing a manageable study routine."
-SS011,C011,2026-08-20,"Student reports stress related to examinations and mentions personal information that should not be included in a general handover. Consent preferences need to be checked."
-SS012,C012,2026-08-21,"Student reports academic stress and poor sleep but the session does not clearly specify the student's current goal."
+S001,C001,2026-10-02,Student mentions severe sleep loss due to upcoming thesis submission and family pressure.
+S002,C002,2026-10-03,Client feels overwhelmed by coursework and admits thinking about giving up completely.
+S003,C003,2026-10-04,Student experiences extreme anxiety before final examinations and struggles with insomnia.
+S004,C004,2026-10-05,Student mentions severe sleep loss due to upcoming thesis submission and family pressure.
+S005,C005,2026-10-06,Client feels overwhelmed by coursework and admits thinking about giving up completely.
+S006,C006,2026-10-07,Client feels overwhelmed by coursework and admits thinking about giving up completely.
+S007,C007,2026-10-08,Student states 'I do not know how much longer I can continue like this' after failing midterm.
+S008,C008,2026-10-09,Student reports feeling lonely and isolated while struggling with grade drop.
+S009,C009,2026-10-10,Client reports severe tension with parents due to failing academic grades.
+S010,C010,2026-10-11,Student experiences extreme anxiety before final examinations and struggles with insomnia.
+S011,C011,2026-10-12,Client reports severe tension with parents due to failing academic grades.
+S012,C012,2026-10-13,Student mentions severe sleep loss due to upcoming thesis submission and family pressure.
+S013,C013,2026-10-14,Client feels overwhelmed by coursework and admits thinking about giving up completely.
+S014,C014,2026-10-15,Student states 'I do not know how much longer I can continue like this' after failing midterm.
+S015,C015,2026-10-16,Student reports feeling lonely and isolated while struggling with grade drop.
+S016,C016,2026-10-17,Student experiences extreme anxiety before final examinations and struggles with insomnia.
+S017,C017,2026-10-18,Student states 'I do not know how much longer I can continue like this' after failing midterm.
+S018,C018,2026-10-19,Client expresses feeling completely isolated in dorms and unable to establish social support.
+S019,C019,2026-10-20,Client reports feeling unsafe in current living environment due to immediate danger.
+S020,C020,2026-10-21,Client reports severe tension with parents due to failing academic grades.
+S021,C021,2026-10-22,Student reports feeling lonely and isolated while struggling with grade drop.
+S022,C022,2026-10-23,Student experiences extreme anxiety before final examinations and struggles with insomnia.
+S023,C023,2026-10-24,Client reports feeling unsafe in current living environment due to immediate danger.
+S024,C024,2026-10-25,Student reports feeling lonely and isolated while struggling with grade drop.
+S025,C025,2026-10-26,Client reports severe tension with parents due to failing academic grades.
+S026,C026,2026-10-27,Student states 'I do not know how much longer I can continue like this' after failing midterm.
+S027,C027,2026-10-28,Student reports feeling lonely and isolated while struggling with grade drop.
+S028,C028,2026-10-01,Student reports feeling lonely and isolated while struggling with grade drop.
+S029,C029,2026-10-02,Student states 'I do not know how much longer I can continue like this' after failing midterm.
+S030,C030,2026-10-03,Client reports feeling unsafe in current living environment due to immediate danger.
